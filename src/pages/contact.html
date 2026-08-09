@@ -29,9 +29,10 @@
       </div>
     </div>
 
-    <!-- With no data-endpoint set the form confirms locally, matching the
-         prototype. Add data-endpoint="https://…" to POST the payload as JSON. -->
-    <form class="form" data-contact-form novalidate>
+    <!-- Posts to the serverless function in api/contact.js, which emails
+         support@aqademiq.com. Clear data-endpoint to fall back to the
+         prototype's local-only confirmation. -->
+    <form class="form" data-contact-form data-endpoint="/api/contact" novalidate>
       <div class="field">
         <label for="c-name">NAME</label>
         <input id="c-name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
@@ -61,7 +62,14 @@
         <p class="field__error" hidden></p>
       </div>
 
-      <p class="field__error" data-form-error hidden>That didn't send. Email us at hello@r13labs.com and we'll pick it up there.</p>
+      <!-- Bot trap: hidden from people, irresistible to form-filling scripts.
+           api/contact.js silently discards anything that fills it in. -->
+      <div class="honeypot" aria-hidden="true">
+        <label for="c-company">Company</label>
+        <input id="c-company" name="company" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <p class="field__error" data-form-error hidden>That didn't send. Email us at support@aqademiq.com and we'll pick it up there.</p>
 
       <button class="btn btn--primary form__submit" type="submit">Send message</button>
     </form>

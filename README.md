@@ -119,18 +119,53 @@ Two conventions worth knowing before editing CSS:
 
 ## Contact form
 
-The form validates client-side and then shows the "Got it." confirmation. With
-no endpoint configured it confirms locally, exactly as the prototype does —
-**nothing is sent anywhere yet.**
+Submissions are emailed to **support@aqademiq.com**.
 
-To make it live, add an endpoint to the `<form>` in `src/pages/contact.html`:
+The form validates client-side, `POST`s JSON to `/api/contact`, and shows the
+"Got it." confirmation. [api/contact.js](api/contact.js) is a Vercel serverless
+function that revalidates the input and hands it to Resend's REST API — plain
+`fetch`, no npm dependency. The visitor's address goes in `reply_to`, so
+replying from the inbox goes straight back to them.
 
-```html
-<form class="form" data-contact-form data-endpoint="https://…" novalidate>
-```
+A hidden honeypot field catches basic form-spam bots; anything that fills it in
+gets a `200` and is silently discarded.
 
-It will `POST` the fields as JSON (`name`, `email`, `topic`, `message`) and fall
-back to a visible error pointing at hello@r13labs.com if the request fails.
+### Setup — one-time, and the form will not deliver until it's done
+
+1. Create a [Resend](https://resend.com) account and verify **r13labs.com** as a
+   sending domain (add the DNS records it gives you).
+2. In Vercel → Project → Settings → Environment Variables, add:
+
+   | Name | Value |
+   | --- | --- |
+   | `RESEND_API_KEY` | your Resend API key |
+
+3. Redeploy.
+
+Optional overrides, both with sensible defaults: `CONTACT_TO`
+(`support@aqademiq.com`) and `CONTACT_FROM` (`R13 Labs <website@r13labs.com>` —
+this domain must be the verified one).
+
+Without `RESEND_API_KEY` the function returns 500 and the form shows a visible
+error pointing at support@aqademiq.com, so a misconfiguration is never silent.
+The function is Vercel-only; `npm run dev` serves static files, so the form
+falls back to the error path locally.
+
+To swap providers, replace the single `fetch` call in `api/contact.js`. To go
+back to the prototype's local-only confirmation, drop `data-endpoint` from the
+`<form>` in `src/pages/contact.html`.
+
+## Domain and SEO
+
+Production is **https://r13labs.com**, set as `SITE_URL` in
+[build.js](build.js). The build uses it for each page's `<link rel="canonical">`
+and `og:url`, the absolute `og:image`, and `dist/sitemap.xml`, which is
+generated from the non-draft pages so a held-back page can never leak into it.
+`public/robots.txt` points at the sitemap.
+
+Preview deploys keep canonicals pointing at production on purpose, so a preview
+never competes with the real site in search. Override with a `SITE_URL`
+environment variable if you ever need otherwise.
 
 ## What differs from the prototypes
 
@@ -162,10 +197,13 @@ deliberate additions:
 
 ## Known gaps
 
-- **Privacy Policy** links to `#`. The design left it unresolved; there's a TODO
-  on it in `src/partials/footer.html`.
-- **No sitemap.** `public/robots.txt` has the line to uncomment once the
-  production domain is settled.
+- **`RESEND_API_KEY` is not set yet.** The form will show its error state until
+  it is — see [Setup](#setup--one-time-and-the-form-will-not-deliver-until-its-done).
+- **The contact page displays `hello@r13labs.com`** as the email address, but
+  form submissions go to support@aqademiq.com. Worth confirming the displayed
+  address is a live mailbox, or changing it in `src/pages/contact.html`.
+- **`og:image` is the logo lockup**, not a purpose-made social card. A 1200×630
+  image would preview far better when links are shared.
 - **`design/` also contains `-endel-v1` variants** of every page. Those are
   earlier alternates; the unsuffixed files are what's built here.
 - **Home's hero has one CTA**, not the two in the design — "Explore the engine"

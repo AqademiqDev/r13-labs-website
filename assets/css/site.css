@@ -1412,6 +1412,16 @@ h1, h2, h3 { margin: 0; }
   border: 0;
 }
 
+/* Bot trap. Moved off-screen rather than display:none — plenty of scripts skip
+   hidden inputs, but follow one that is technically rendered. */
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 .topics {
   display: flex;
   gap: 8px;

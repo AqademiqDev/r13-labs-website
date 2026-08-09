@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Add once the production domain is fixed:
-# Sitemap: https://<your-domain>/sitemap.xml
+Sitemap: https://r13labs.com/sitemap.xml

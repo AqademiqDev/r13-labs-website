@@ -20,6 +20,11 @@ const ROOT = __dirname;
 const SRC = path.join(ROOT, 'src');
 const DIST = path.join(ROOT, 'dist');
 
+// Production origin, used for canonical URLs, og:url and the sitemap. Preview
+// deploys keep pointing at production on purpose — a preview shouldn't compete
+// with the real site in search results.
+const SITE_URL = (process.env.SITE_URL || 'https://r13labs.com').replace(/\/$/, '');
+
 const read = (p) => fs.readFileSync(p, 'utf8');
 
 /** Pull the leading `<!--{...}-->` JSON block off a page file. */
@@ -39,6 +44,24 @@ function fill(template, values, file) {
     if (!(key in values)) throw new Error(`${file}: no value for {{${key}}}`);
     return values[key];
   });
+}
+
+/** index.html is the site root; every other page keeps its filename. */
+function canonicalFor(file) {
+  return file === 'index.html' ? `${SITE_URL}/` : `${SITE_URL}/${file}`;
+}
+
+/** Generated rather than hand-maintained so drafts can never leak into it. */
+function writeSitemap(pages) {
+  const urls = pages
+    .map((file) => `  <url><loc>${canonicalFor(file)}</loc></url>`)
+    .join('\n');
+
+  fs.writeFileSync(
+    path.join(DIST, 'sitemap.xml'),
+    `<?xml version="1.0" encoding="UTF-8"?>\n` +
+      `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`
+  );
 }
 
 function copyDir(from, to) {
@@ -80,6 +103,8 @@ function build() {
         title: meta.title,
         description: meta.description,
         bodyClass: meta.bodyClass || '',
+        canonical: canonicalFor(file),
+        siteUrl: SITE_URL,
         nav,
         footer,
         content: body.trimEnd(),
@@ -89,12 +114,12 @@ function build() {
     fs.writeFileSync(path.join(DIST, file), html);
   }
 
+  writeSitemap(pages);
+
   copyDir(path.join(ROOT, 'assets'), path.join(DIST, 'assets'));
 
-  const extras = ['robots.txt', 'sitemap.xml'];
-  for (const name of extras) {
-    const src = path.join(ROOT, 'public', name);
-    if (fs.existsSync(src)) fs.copyFileSync(src, path.join(DIST, name));
+  if (fs.existsSync(path.join(ROOT, 'public'))) {
+    copyDir(path.join(ROOT, 'public'), DIST);
   }
 
   console.log(`Built ${pages.length} pages -> dist/`);
