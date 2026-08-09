@@ -1,0 +1,12 @@
+# Build output — Vercel regenerates this from src/ on every deploy.
+dist/
+
+# Design handoff. Kept locally as reference; the zip and the pitch materials
+# inside it (decks, owner PDFs, screenshots) are not for the repo.
+design/
+*.zip
+
+node_modules/
+.vercel/
+.claude/settings.local.json
+.DS_Store

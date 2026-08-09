@@ -1,0 +1,91 @@
+/* R13 Labs — Color system.
+   Dark is the brand default (:root); light theme via [data-theme="light"].
+   Primitive ramps are theme-agnostic; semantic aliases flip per theme. */
+:root{
+  /* ---- Primitive: Brand green (lime) ---- */
+  --green-50:#eefcdf;  --green-100:#def7c1; --green-200:#c5ec95; --green-300:#afdf6a;
+  --green-400:#9fd34f; --green-500:#8fca38; --green-600:#7eab33; --green-700:#63862c;
+  --green-800:#4c6622; --green-900:#374b1a; --green-950:#233010;
+  /* ---- Primitive: Warm neutral ---- */
+  --neutral-0:#0c0a07;   --neutral-50:#fcfaf7;  --neutral-100:#f5f3f0; --neutral-200:#e8e6e3;
+  --neutral-300:#d6d2cd;  --neutral-400:#a8a49f; --neutral-500:#83807b; --neutral-600:#66635e;
+  --neutral-700:#4e4b47;  --neutral-800:#373430; --neutral-900:#25221f; --neutral-950:#171411;
+  --canvas-black:#140e0b; /* signature R13 near-black */
+  /* ---- Primitive: Semantic hues ---- */
+  --amber-400:#ffb73e; --amber-500:#f5a400; --amber-600:#d78d00;
+  --red-400:#fc5950;   --red-500:#f03130;   --red-600:#d2161e;
+  --blue-400:#60aaf3;  --blue-500:#3a93e6;  --blue-600:#047ad1;
+  --white:#ffffff; --black:#000000;
+
+  /* ================= Semantic — DARK (brand default) ================= */
+  --surface-sunken:#0c0a07;
+  --surface-base:#140e0b;
+  --surface-raised:#1c1815;
+  --surface-overlay:#25221f;
+  --surface-inset:#100b09;
+
+  --border-subtle:rgba(255,255,255,.07);
+  --border-default:rgba(255,255,255,.13);
+  --border-strong:rgba(255,255,255,.22);
+
+  --text-primary:#fcfaf7;
+  --text-secondary:#b7b3ae;
+  --text-muted:#83807b;
+  --text-disabled:#57534e;
+  --text-inverse:#140e0b;
+  --text-on-accent:#140e0b;
+
+  --accent:#8fca38;
+  --accent-hover:#9fd34f;
+  --accent-active:#7eab33;
+  --accent-text:#a9dc5f;
+  --accent-subtle:rgba(143,202,56,.14);
+  --accent-subtle-hover:rgba(143,202,56,.22);
+  --accent-border:rgba(143,202,56,.45);
+
+  --success:#8fca38; --success-text:#a9dc5f; --success-subtle:rgba(143,202,56,.14);
+  --warning:#f5a400; --warning-text:#ffc25c; --warning-subtle:rgba(245,164,0,.14);
+  --danger:#f03130;  --danger-text:#ff8079;  --danger-subtle:rgba(240,49,48,.15);
+  --info:#3a93e6;    --info-text:#7bb8f5;    --info-subtle:rgba(58,147,230,.15);
+
+  --focus-ring:rgba(143,202,56,.55);
+  --overlay-scrim:rgba(12,10,7,.66);
+  color-scheme:dark;
+}
+
+/* ================= Semantic — LIGHT ================= */
+[data-theme="light"]{
+  --surface-sunken:#f5f3f0;
+  --surface-base:#fbf9f6;
+  --surface-raised:#ffffff;
+  --surface-overlay:#ffffff;
+  --surface-inset:#f5f3f0;
+
+  --border-subtle:rgba(20,14,11,.06);
+  --border-default:rgba(20,14,11,.12);
+  --border-strong:rgba(20,14,11,.20);
+
+  --text-primary:#1a1613;
+  --text-secondary:#4e4b47;
+  --text-muted:#83807b;
+  --text-disabled:#a8a49f;
+  --text-inverse:#fcfaf7;
+  --text-on-accent:#1a1613;
+
+  --accent:#8fca38;
+  --accent-hover:#7eab33;
+  --accent-active:#63862c;
+  --accent-text:#5c7d27;
+  --accent-subtle:rgba(143,202,56,.16);
+  --accent-subtle-hover:rgba(143,202,56,.26);
+  --accent-border:rgba(143,202,56,.55);
+
+  --success:#63862c; --success-text:#5c7d27; --success-subtle:rgba(143,202,56,.18);
+  --warning:#d78d00; --warning-text:#9a6600; --warning-subtle:rgba(245,164,0,.16);
+  --danger:#e5140f;  --danger-text:#c00d13;  --danger-subtle:rgba(240,49,48,.12);
+  --info:#047ad1;    --info-text:#0a63a8;    --info-subtle:rgba(58,147,230,.12);
+
+  --focus-ring:rgba(143,202,56,.5);
+  --overlay-scrim:rgba(20,14,11,.45);
+  color-scheme:light;
+}

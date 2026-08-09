@@ -1,0 +1,31 @@
+<nav class="nav" aria-label="Primary">
+  <a class="nav__brand" href="index.html">
+    <img src="assets/img/logo-lockup-dark.png" alt="R13 Labs" width="139" height="34">
+  </a>
+
+  <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-panel">
+    <span class="nav__toggle-box" aria-hidden="true"><span></span><span></span></span>
+    <span class="sr-only">Menu</span>
+  </button>
+
+  <div class="nav__panel" id="nav-panel">
+    <ul class="nav__links">
+      <li><a class="nav__link" href="science.html">Science</a></li>
+      <li class="nav__item nav__item--products" data-dropdown>
+        <button class="nav__link nav__trigger" type="button" aria-expanded="false" aria-controls="nav-products">
+          Products
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav__dropdown" id="nav-products" data-dropdown-panel hidden>
+          <div class="nav__dropdown-panel">
+            <a href="https://aqademiq.com" target="_blank" rel="noopener noreferrer">Aqademiq<span class="sr-only"> (opens in a new tab)</span></a>
+            <a href="venues.html">Prism Venues</a>
+            <a href="automotive.html">Prism Automotive</a>
+          </div>
+        </div>
+      </li>
+      <li><a class="nav__link" href="company.html">Company</a></li>
+    </ul>
+    <a class="btn btn--primary btn--sm nav__cta" href="contact.html">Talk to us</a>
+  </div>
+</nav>

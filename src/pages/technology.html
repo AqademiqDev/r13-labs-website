@@ -1,0 +1,141 @@
+<!--{
+  "draft": true,
+  "page": "technology",
+  "title": "The Prism Engine — R13 Labs",
+  "description": "The Prism Engine is the proprietary technology behind everything we build: a live read of your state, and sound generated to meet it, in real time, on device."
+}-->
+<header class="tech-hero">
+  <div style="position:absolute;inset:0" aria-hidden="true">
+    <div class="grid-overlay"></div>
+    <svg class="tech-hero__diagram" width="1500" height="330" viewBox="0 0 1500 330" fill="none">
+      <path d="M-20 165 H660" stroke="rgba(255,255,255,.10)" stroke-width="1.3"/>
+      <path d="M-20 165 H660" stroke="rgba(255,255,255,.5)" stroke-width="1.3" stroke-dasharray="10 22" style="animation:r13flow 2.6s linear infinite"/>
+      <path d="M690 165 L1520 60" stroke="rgba(255,255,255,.34)" stroke-width="1.3"/>
+      <path d="M690 165 L1520 165" stroke="rgba(255,255,255,.5)" stroke-width="1.3"/>
+      <path d="M690 165 L1520 270" stroke="rgba(255,255,255,.34)" stroke-width="1.3"/>
+      <path d="M750 82 L810 248" stroke="rgba(255,255,255,.75)" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M750 82 L810 248" stroke="rgba(255,255,255,.16)" stroke-width="8" style="filter:blur(4px)"/>
+      <circle cx="1240" cy="96" r="4" fill="#fff" opacity=".7" style="animation:r13pulse-strong 5s ease-in-out infinite"/>
+      <circle cx="1180" cy="165" r="4" fill="#fff" opacity=".9" style="animation:r13pulse-strong 4s ease-in-out 1s infinite"/>
+      <circle cx="1240" cy="234" r="4" fill="#fff" opacity=".7" style="animation:r13pulse-strong 5.6s ease-in-out 2s infinite"/>
+    </svg>
+    <div class="tech-hero__wash"></div>
+    <span class="tech-hero__caption">SIGNAL IN&nbsp;&nbsp;·&nbsp;&nbsp;STATE READ&nbsp;&nbsp;·&nbsp;&nbsp;SOUND OUT</span>
+  </div>
+
+  <div class="tech-hero__body">
+    <h1 class="h1 measure" style="--measure:980px">Real-time, personalized sound generation.</h1>
+    <p class="lead measure mt-26" style="--measure:560px">The Prism Engine is the proprietary technology behind everything we build.</p>
+  </div>
+</header>
+
+<section class="section" style="--pt:70px" aria-labelledby="engine-title">
+  <div style="text-align:center">
+    <h2 class="h2 measure" id="engine-title" style="--measure:820px">What makes the Prism Engine</h2>
+    <p class="body-lg measure mt-24" style="--measure:640px">Taking signals from the device it runs on, the Prism Engine forms a live read of your state — then generates the sound to meet it, in real time, on device.</p>
+  </div>
+
+  <div class="container mt-64" style="--w:940px">
+    <article class="stage">
+      <div class="stage__copy">
+        <span class="eyebrow">01 — INPUTS</span>
+        <h3 class="h3 h3--2xl mt-14">Inputs: you, in the moment</h3>
+        <p>The engine uses what your device can honestly offer. It doesn't need a wearable, and it doesn't depend on any single sensor.</p>
+      </div>
+      <div class="stage__art" aria-hidden="true">
+        <div class="node-row" style="--node-gap:16px;--rail-inset:20px;--rail-a:.22">
+          <div class="node" style="--size:50px;--node-a:.55"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="6.8" stroke="#fff" stroke-width="1.4"/><path d="M12 8.6V12l2.4 1.6" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+          <div class="node" style="--size:50px;--node-a:.55"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.1" stroke="#fff" stroke-width="1.4"/><path d="M12 3v2.3M12 18.7V21M3 12h2.3M18.7 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+          <div class="node node--lit" style="--size:50px;box-shadow:0 0 20px rgba(255,255,255,.18)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 13h4l2.5-5.5L13 17l2.5-4H21" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="node" style="--size:50px;--node-a:.55"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 15V9M10 17V7M14 14.4V9.6M18 16V8" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+          <div class="node" style="--size:50px;--node-a:.55"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="6.4" stroke="#fff" stroke-width="1.4"/><circle cx="10" cy="10" r="1" fill="#fff"/><circle cx="14" cy="12.6" r=".8" fill="#fff"/><circle cx="10.6" cy="14.6" r=".7" fill="#fff"/></svg></div>
+        </div>
+      </div>
+    </article>
+
+    <div class="connector" aria-hidden="true"><span></span><span></span><span></span></div>
+
+    <article class="stage">
+      <div class="stage__copy">
+        <span class="eyebrow">02 — THE READ</span>
+        <h3 class="h3 h3--2xl mt-14">A live estimate, held honestly</h3>
+        <p>The engine holds a continuous estimate of your state, and of how confident it is in that estimate. Low confidence changes how it behaves.</p>
+      </div>
+      <div class="stage__art" aria-hidden="true">
+        <svg width="300" height="130" viewBox="0 0 300 130" fill="none">
+          <path d="M6 65 C40 30 74 30 108 65 S176 100 210 65 S262 40 294 52" stroke="rgba(255,255,255,.9)" stroke-width="1.6"/>
+          <path d="M6 49 C40 14 74 14 108 49 S176 84 210 49 S262 22 294 32" stroke="rgba(255,255,255,.35)" stroke-width="1.1" stroke-dasharray="3 6"/>
+          <path d="M6 81 C40 46 74 46 108 81 S176 116 210 81 S262 58 294 72" stroke="rgba(255,255,255,.35)" stroke-width="1.1" stroke-dasharray="3 6"/>
+          <circle cx="210" cy="65" r="4" fill="#fff"/>
+          <circle cx="210" cy="65" r="9.5" stroke="rgba(255,255,255,.35)" stroke-width="1"/>
+        </svg>
+      </div>
+    </article>
+
+    <div class="connector" aria-hidden="true"><span></span><span></span><span></span></div>
+
+    <article class="stage">
+      <div class="stage__copy">
+        <span class="eyebrow">03 — SOUND GENERATION</span>
+        <h3 class="h3 h3--2xl mt-14">Sound that reshapes itself</h3>
+        <p>Sound elements are designed by our audio team. Driven by the read, what you're hearing reshapes itself as your state changes.</p>
+      </div>
+      <div class="stage__art" aria-hidden="true">
+        <svg width="280" height="120" viewBox="0 0 280 120" fill="none">
+          <path d="M20 44v32M40 28v64M60 50v20M80 22v76M100 38v44M120 52v16M140 30v60M160 44v32M180 24v72M200 50v20M220 36v48M240 46v28M260 40v40" stroke="rgba(255,255,255,.85)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M20 60 H260" stroke="rgba(255,255,255,.14)" stroke-width="1"/>
+        </svg>
+      </div>
+    </article>
+
+    <div class="connector" aria-hidden="true"><span></span><span></span><span></span></div>
+
+    <article class="stage">
+      <div class="stage__copy">
+        <span class="eyebrow">04 — OUTPUT</span>
+        <h3 class="h3 h3--2xl mt-14">Output: your device</h3>
+        <p>Generated locally, in real time. Nothing has to leave your device for the sound to happen.</p>
+      </div>
+      <div class="stage__art" aria-hidden="true">
+        <svg width="280" height="120" viewBox="0 0 280 120" fill="none">
+          <path d="M96 40 a34 34 0 0 0 0 40" stroke="rgba(255,255,255,.35)" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M108 48 a20 20 0 0 0 0 24" stroke="rgba(255,255,255,.6)" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M184 40 a34 34 0 0 1 0 40" stroke="rgba(255,255,255,.35)" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M172 48 a20 20 0 0 1 0 24" stroke="rgba(255,255,255,.6)" stroke-width="1.4" stroke-linecap="round"/>
+          <rect x="122" y="30" width="36" height="60" rx="9" stroke="rgba(255,255,255,.9)" stroke-width="1.5"/>
+          <path d="M134 37h12" stroke="rgba(255,255,255,.6)" stroke-width="1.4" stroke-linecap="round"/>
+          <circle cx="140" cy="76" r="2" fill="#fff"/>
+        </svg>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="section section--center" style="--pt:170px">
+  <h2 class="h2 measure" style="--measure:760px">One engine, many surfaces</h2>
+  <p class="body-lg measure mt-24" style="--measure:680px">The part that reads state and the part that makes sound are separate. That's why the same engine serves a student, a room, and a cabin — and why it can drive things other than audio.</p>
+
+  <div class="fanout" aria-hidden="true">
+    <div class="fanout__hub">
+      <svg width="30" height="30" viewBox="0 0 32 32" fill="none"><path d="M16 8.6 L23.4 21.8 H8.6 Z" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg>
+    </div>
+    <span class="fanout__spine"></span>
+    <span class="fanout__bar"></span>
+    <span class="fanout__drop" style="--x:16.6%"></span>
+    <span class="fanout__drop" style="--x:50%"></span>
+    <span class="fanout__drop" style="--x:83.4%"></span>
+    <span class="pill fanout__label" style="--x:16.6%">A STUDENT</span>
+    <span class="pill fanout__label" style="--x:50%">A ROOM</span>
+    <span class="pill fanout__label" style="--x:83.4%">A CABIN</span>
+  </div>
+</section>
+
+<section class="section section--center section--clip" style="--pt:170px;--pb:180px">
+  <div class="cta-glow" style="--glow-a:.18" aria-hidden="true"></div>
+  <div style="position:relative">
+    <h2 class="h2">The science behind the sound</h2>
+    <div class="mt-34">
+      <a class="btn btn--primary" href="science.html">Read the science&nbsp;↗</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,78 @@
+<!--{
+  "page": "contact",
+  "title": "Contact — R13 Labs",
+  "description": "Waitlist, venue pilots, automotive partnerships, research, press — one door, we'll route it."
+}-->
+<section class="section section--clip" style="--pt:220px;--pb:160px">
+  <div style="position:absolute;inset:0" aria-hidden="true">
+    <div class="grid-overlay" style="--grid-mask:radial-gradient(80% 70% at 50% 0%,#000 12%,transparent 78%)"></div>
+  </div>
+
+  <div class="contact">
+    <div class="contact__copy">
+      <h1 class="h1 h1--contact">Talk to us.</h1>
+      <p class="lead">Waitlist, venue pilots, automotive partnerships, research, press — one door, we'll route it.</p>
+
+      <div class="contact__details">
+        <div class="contact__detail">
+          <span class="mono-label">EMAIL</span>
+          <a href="mailto:hello@r13labs.com">hello@r13labs.com</a>
+        </div>
+        <div class="contact__detail">
+          <span class="mono-label">HQ</span>
+          <span>Abu Dhabi, UAE</span>
+        </div>
+        <div class="contact__detail">
+          <span class="mono-label">ENGINEERING</span>
+          <span>Coimbatore, India</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- With no data-endpoint set the form confirms locally, matching the
+         prototype. Add data-endpoint="https://…" to POST the payload as JSON. -->
+    <form class="form" data-contact-form novalidate>
+      <div class="field">
+        <label for="c-name">NAME</label>
+        <input id="c-name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+        <p class="field__error" hidden></p>
+      </div>
+
+      <div class="field">
+        <label for="c-email">EMAIL</label>
+        <input id="c-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+        <p class="field__error" hidden></p>
+      </div>
+
+      <fieldset class="fieldset">
+        <legend class="fieldset__legend">I'M HERE ABOUT</legend>
+        <div class="topics">
+          <button class="topic" type="button" data-topic="Aqademiq waitlist" aria-pressed="true">AQADEMIQ WAITLIST</button>
+          <button class="topic" type="button" data-topic="Venue demo" aria-pressed="false">VENUE DEMO</button>
+          <button class="topic" type="button" data-topic="Automotive" aria-pressed="false">AUTOMOTIVE</button>
+          <button class="topic" type="button" data-topic="Other" aria-pressed="false">OTHER</button>
+        </div>
+        <input type="hidden" name="topic" value="Aqademiq waitlist" data-topic-value>
+      </fieldset>
+
+      <div class="field">
+        <label for="c-msg">MESSAGE</label>
+        <textarea id="c-msg" name="message" rows="4" placeholder="What are you thinking?" required></textarea>
+        <p class="field__error" hidden></p>
+      </div>
+
+      <p class="field__error" data-form-error hidden>That didn't send. Email us at hello@r13labs.com and we'll pick it up there.</p>
+
+      <button class="btn btn--primary form__submit" type="submit">Send message</button>
+    </form>
+
+    <div class="form-sent" data-contact-sent tabindex="-1" role="status" hidden>
+      <div class="form-sent__mark" aria-hidden="true">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M7 15.5l5.2 5L23 10" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h2>Got it.</h2>
+      <p>Thanks<span data-sent-name></span>. We read everything and reply within a few days.</p>
+      <button class="btn btn--ghost" type="button" data-send-another>Send another</button>
+    </div>
+  </div>
+</section>

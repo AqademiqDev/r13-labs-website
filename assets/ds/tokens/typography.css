@@ -1,0 +1,46 @@
+/* R13 Labs — Typography. Single typeface: Plus Jakarta Sans.
+   Display sizes lean light-weight with tight tracking (see the wordmark);
+   body copy is regular; eyebrows/overlines use wide-tracked semibold. */
+:root{
+  --font-sans:'Plus Jakarta Sans',ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --font-display:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;
+  --font-mono:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;
+
+  /* weight axis (variable font 200–800) */
+  --weight-extralight:200;
+  --weight-light:300;
+  --weight-regular:400;
+  --weight-medium:500;
+  --weight-semibold:600;
+  --weight-bold:700;
+  --weight-extrabold:800;
+
+  /* type scale (rem @ 16px base) */
+  --text-display-2xl:4.5rem;  /* 72 */
+  --text-display-xl:3.75rem;  /* 60 */
+  --text-display-lg:3rem;     /* 48 */
+  --text-h1:2.5rem;           /* 40 */
+  --text-h2:2rem;             /* 32 */
+  --text-h3:1.5rem;           /* 24 */
+  --text-h4:1.25rem;          /* 20 */
+  --text-lg:1.125rem;         /* 18 */
+  --text-md:1rem;             /* 16 */
+  --text-sm:0.875rem;         /* 14 */
+  --text-xs:0.8125rem;        /* 13 */
+  --text-2xs:0.75rem;         /* 12 */
+
+  /* line-height */
+  --leading-none:1;
+  --leading-tight:1.1;
+  --leading-snug:1.25;
+  --leading-normal:1.5;
+  --leading-relaxed:1.65;
+
+  /* letter-spacing */
+  --tracking-tighter:-0.03em;
+  --tracking-tight:-0.015em;
+  --tracking-normal:0;
+  --tracking-wide:0.02em;
+  --tracking-wider:0.08em;
+  --tracking-widest:0.14em;
+}

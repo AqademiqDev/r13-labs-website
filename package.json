@@ -1,0 +1,11 @@
+{
+  "name": "r13-labs-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "R13 Labs marketing site — static build from the Claude Design handoff.",
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node build.js && node serve.js",
+    "serve": "node serve.js"
+  }
+}
