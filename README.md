@@ -2,9 +2,10 @@
 
 The R13 Labs marketing site, built from the Claude Design handoff in `design/`.
 
-Six pages ship: Home, Science, Company, Contact, Prism Venues, Prism Automotive.
+Seven pages ship: Home, Technology, Science, Company, Contact, Prism Venues,
+Prism Automotive.
 
-Two more exist in `src/pages/` but are **held back from the build** — see
+One more exists in `src/pages/` but is **held back from the build** — see
 [Drafts](#drafts).
 
 ## Running it
@@ -16,6 +17,10 @@ npm run dev
 Builds `dist/` and serves it at http://localhost:4173. `npm run build` builds
 only. There are no dependencies — the build and the dev server are two small
 Node scripts.
+
+`npm test` runs the unit tests on Node's built-in runner — also no
+dependencies. They cover the Technology page's confidence model; see
+[The confidence demo](#the-confidence-demo).
 
 `dist/` is plain static HTML and can also be opened straight from the
 filesystem; every path in it is relative.
@@ -64,8 +69,10 @@ src/
 assets/
   ds/                the design-system export, copied verbatim
   css/site.css       everything else
-  js/site.js         nav, current-page marker, contact form
+  js/site.js         nav, current-page marker, contact form, confidence demo
+  js/confidence.js   the confidence model — no DOM, so it can be tested
   img/               logo lockup + mark
+test/                unit tests, run by `npm test`
 build.js             assembles src/ into dist/
 ```
 
@@ -75,19 +82,18 @@ partials, and copies `assets/` and `public/` across. Rerun it after any edit.
 
 ### Drafts
 
-A page with `"draft": true` in its front matter is skipped by the build. Two are
+A page with `"draft": true` in its front matter is skipped by the build. One is
 held back today:
 
 | Page | Why | To re-enable |
 | --- | --- | --- |
-| `technology.html` | Not shipping for now. | Drop the `draft` flag, restore the Technology entry in `src/partials/nav.html` and `footer.html`, and put back the "Explore the engine" CTA on Home, "How it works ↗" on Home, and "The engine behind it ↗" on Venues and Automotive. |
 | `aqademiq.html` | Every Aqademiq link now points at **aqademiq.com**, so the internal page has no inbound links. | Drop the `draft` flag and point the three links back at `aqademiq.html`. |
 
 The build prints what it held back, so a draft can't go unnoticed:
 
 ```
-Built 6 pages -> dist/
-Held back as draft: aqademiq.html, technology.html
+Built 7 pages -> dist/
+Held back as draft: aqademiq.html
 ```
 
 ### External links
@@ -116,6 +122,29 @@ Two conventions worth knowing before editing CSS:
 - **`--measure` and `.mt-*`** — headings and paragraphs carry a per-instance
   max-width and top margin in the design. Those live as `--measure` and the
   `.mt-*` utilities so the exact values stay visible in the markup.
+
+## The confidence demo
+
+The panel on Technology is the only real logic on the site. Six signal toggles;
+turning any of them off recomputes each of the four state dimensions as the
+share of its weight table that is still available, and that percentage drives
+the bar width, the colour band and the status line.
+
+The model lives in [assets/js/confidence.js](assets/js/confidence.js) and knows
+nothing about the DOM, so it can be exercised directly — the weight tables, the
+rounding, the three bands, and every branch of the status line are covered in
+[test/confidence.test.js](test/confidence.test.js). `site.js` only binds the
+toggles and writes the result back.
+
+Two things to keep in mind when editing it:
+
+- **The bands name themselves, they don't carry colours.** The model returns
+  `high` / `mid` / `low`; the row carries it as `data-band` and `site.css`
+  resolves it against `--conf-*`. Colours stay in one place.
+- **The markup ships at full authority.** Every weight table sums to 1.00, so
+  all-signals-on is 100% across the board — which is exactly what
+  `technology.html` contains. The panel is correct before the script runs, and
+  with it blocked entirely.
 
 ## Contact form
 
@@ -194,6 +223,11 @@ deliberate additions:
 - **Form validation.** The prototype's send button had no validation behind it.
 - **Card hover animation is CSS.** The prototype drove it from JS state; the
   result is identical and it now works on focus too.
+- **The architecture diagram drops its connectors below 700px.** The connector
+  SVGs stretch horizontally on their own, but their endpoint x-coordinates are
+  baked to the desktop column counts, so they stop meeting the cards once the
+  grids reflow to 3 / 2 / 1 columns. They are hidden rather than redrawn and
+  vertical order carries the flow — see the note in `site.css`.
 
 ## Known gaps
 
@@ -206,6 +240,3 @@ deliberate additions:
   image would preview far better when links are shared.
 - **`design/` also contains `-endel-v1` variants** of every page. Those are
   earlier alternates; the unsuffixed files are what's built here.
-- **Home's hero has one CTA**, not the two in the design — "Explore the engine"
-  went with the Technology page. Same for the secondary CTA on Venues and
-  Automotive. Restoring Technology restores all of them.

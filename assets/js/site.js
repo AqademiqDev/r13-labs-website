@@ -247,7 +247,66 @@
     }
   }
 
+  /* -------------------------------------------------------------------------
+     Confidence demo (Technology)
+
+     The maths lives in confidence.js. This only binds the toggles and writes
+     the result back into markup that already ships at full authority, so the
+     panel reads correctly with the script absent or still loading.
+     ---------------------------------------------------------------------- */
+
+  function initConfidenceDemo() {
+    var demo = document.querySelector('[data-confidence]');
+    var model = window.R13Confidence;
+    if (!demo || !model) return;
+
+    var toggles = demo.querySelectorAll('[data-signal]');
+    var rows = demo.querySelectorAll('[data-dimension]');
+    var status = demo.querySelector('[data-confidence-status]');
+    var signalsOn = model.allOn();
+
+    function render() {
+      var dimensions = model.computeDimensions(signalsOn);
+
+      for (var i = 0; i < rows.length; i++) {
+        var row = rows[i];
+        var dimension = null;
+
+        for (var j = 0; j < dimensions.length; j++) {
+          if (dimensions[j].key === row.getAttribute('data-dimension')) {
+            dimension = dimensions[j];
+          }
+        }
+        if (!dimension) continue;
+
+        var bar = row.querySelector('[data-confidence-bar]');
+        var fill = row.querySelector('[data-confidence-fill]');
+        var figure = row.querySelector('[data-confidence-pct]');
+
+        row.setAttribute('data-band', dimension.band);
+        fill.style.width = dimension.pct + '%';
+        figure.textContent = dimension.pct + '%';
+        bar.setAttribute('aria-valuenow', String(dimension.pct));
+        bar.setAttribute('aria-valuetext', dimension.pct + '% authority');
+      }
+
+      if (status) status.textContent = model.statusLine(signalsOn, dimensions);
+    }
+
+    for (var t = 0; t < toggles.length; t++) {
+      toggles[t].addEventListener('click', function (event) {
+        var button = event.currentTarget;
+        var key = button.getAttribute('data-signal');
+
+        signalsOn[key] = !signalsOn[key];
+        button.setAttribute('aria-pressed', String(signalsOn[key]));
+        render();
+      });
+    }
+  }
+
   initNav();
   initCurrentPage();
   initContactForm();
+  initConfidenceDemo();
 })();

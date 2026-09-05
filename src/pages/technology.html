@@ -1,139 +1,296 @@
 <!--{
-  "draft": true,
   "page": "technology",
   "title": "The Prism Engine — R13 Labs",
-  "description": "The Prism Engine is the proprietary technology behind everything we build: a live read of your state, and sound generated to meet it, in real time, on device."
+  "description": "The Prism Engine reads four dimensions of your state, knows how much to trust each one, and generates sound, haptics and interface to close the gap toward where you want to be."
 }-->
 <header class="tech-hero">
   <div style="position:absolute;inset:0" aria-hidden="true">
     <div class="grid-overlay"></div>
     <svg class="tech-hero__diagram" width="1500" height="330" viewBox="0 0 1500 330" fill="none">
       <path d="M-20 165 H660" stroke="rgba(255,255,255,.10)" stroke-width="1.3"/>
-      <path d="M-20 165 H660" stroke="rgba(255,255,255,.5)" stroke-width="1.3" stroke-dasharray="10 22" style="animation:r13flow 2.6s linear infinite"/>
-      <path d="M690 165 L1520 60" stroke="rgba(255,255,255,.34)" stroke-width="1.3"/>
-      <path d="M690 165 L1520 165" stroke="rgba(255,255,255,.5)" stroke-width="1.3"/>
-      <path d="M690 165 L1520 270" stroke="rgba(255,255,255,.34)" stroke-width="1.3"/>
+      <path class="tech-hero__beam" d="M-20 165 H660" stroke="rgba(255,255,255,.5)" stroke-width="1.3" stroke-dasharray="10 22"/>
+      <path d="M690 165 L1520 40" stroke="rgba(255,255,255,.28)" stroke-width="1.3"/>
+      <path d="M690 165 L1520 130" stroke="rgba(255,255,255,.44)" stroke-width="1.3"/>
+      <path d="M690 165 L1520 200" stroke="rgba(255,255,255,.44)" stroke-width="1.3"/>
+      <path d="M690 165 L1520 290" stroke="rgba(255,255,255,.28)" stroke-width="1.3"/>
       <path d="M750 82 L810 248" stroke="rgba(255,255,255,.75)" stroke-width="1.5" stroke-linejoin="round"/>
       <path d="M750 82 L810 248" stroke="rgba(255,255,255,.16)" stroke-width="8" style="filter:blur(4px)"/>
-      <circle cx="1240" cy="96" r="4" fill="#fff" opacity=".7" style="animation:r13pulse-strong 5s ease-in-out infinite"/>
-      <circle cx="1180" cy="165" r="4" fill="#fff" opacity=".9" style="animation:r13pulse-strong 4s ease-in-out 1s infinite"/>
-      <circle cx="1240" cy="234" r="4" fill="#fff" opacity=".7" style="animation:r13pulse-strong 5.6s ease-in-out 2s infinite"/>
+      <circle class="tech-hero__dot" cx="1250" cy="82" r="4" fill="#8FCA38" opacity=".8" style="--dur:5s"/>
+      <circle class="tech-hero__dot" cx="1190" cy="148" r="4" fill="#fff" opacity=".9" style="--dur:4s;--delay:1s"/>
+      <circle class="tech-hero__dot" cx="1190" cy="204" r="4" fill="#fff" opacity=".9" style="--dur:4.6s;--delay:1.6s"/>
+      <circle class="tech-hero__dot" cx="1250" cy="270" r="4" fill="#8FCA38" opacity=".8" style="--dur:5.6s;--delay:2.2s"/>
     </svg>
     <div class="tech-hero__wash"></div>
-    <span class="tech-hero__caption">SIGNAL IN&nbsp;&nbsp;·&nbsp;&nbsp;STATE READ&nbsp;&nbsp;·&nbsp;&nbsp;SOUND OUT</span>
   </div>
 
   <div class="tech-hero__body">
-    <h1 class="h1 measure" style="--measure:980px">Real-time, personalized sound generation.</h1>
-    <p class="lead measure mt-26" style="--measure:560px">The Prism Engine is the proprietary technology behind everything we build.</p>
+    <h1 class="h1 measure" style="--measure:1000px">State in. Generated output out.</h1>
+    <p class="lead measure mt-26" style="--measure:620px">The Prism Engine reads four dimensions of your state, knows how much to trust each one, and generates sound, haptics and interface to close the gap toward where you want to be.</p>
+    <div class="tech-hero__meta">
+      <span class="tech-hero__trail">SIGNAL IN&nbsp;&nbsp;·&nbsp;&nbsp;STATE READ&nbsp;&nbsp;·&nbsp;&nbsp;OUTPUT SHAPED</span>
+      <span class="tech-hero__badge">PROVISIONAL PATENT FILED · IN 2026</span>
+    </div>
   </div>
 </header>
 
-<section class="section" style="--pt:70px" aria-labelledby="engine-title">
+<section class="section" style="--pt:80px" aria-labelledby="architecture-title">
   <div style="text-align:center">
-    <h2 class="h2 measure" id="engine-title" style="--measure:820px">What makes the Prism Engine</h2>
-    <p class="body-lg measure mt-24" style="--measure:640px">Taking signals from the device it runs on, the Prism Engine forms a live read of your state — then generates the sound to meet it, in real time, on device.</p>
+    <span class="eyebrow">THE ARCHITECTURE</span>
+    <h2 class="h2 measure mt-18" id="architecture-title" style="--measure:820px">One beam in. Four dimensions. Three outputs.</h2>
+    <p class="body-lg measure mt-24" style="--measure:660px">Signals from the device converge into the Prism Context Engine, which splits them into a state vector. Everything downstream is driven by that vector — and by how much of it can be trusted.</p>
   </div>
 
-  <div class="container mt-64" style="--w:940px">
-    <article class="stage">
-      <div class="stage__copy">
-        <span class="eyebrow">01 — INPUTS</span>
-        <h3 class="h3 h3--2xl mt-14">Inputs: you, in the moment</h3>
-        <p>The engine uses what your device can honestly offer. It doesn't need a wearable, and it doesn't depend on any single sensor.</p>
+  <div class="dia mt-70">
+    <div class="dia__signals">
+      <div class="signal-tile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 11V6.2a2 2 0 0 1 4 0V13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M12 10.4a2 2 0 0 1 4 0V13M16 11.4a2 2 0 0 1 4 0v3.4a5.6 5.6 0 0 1-5.6 5.6h-2.6a5 5 0 0 1-3.6-1.5L4 16.6a2 2 0 0 1 3-2.6l1 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <span class="signal-tile__label">INTER&shy;ACTION</span>
       </div>
-      <div class="stage__art" aria-hidden="true">
-        <div class="node-row" style="--node-gap:16px;--rail-inset:20px;--rail-a:.22">
-          <div class="node" style="--size:50px;--node-a:.55"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="6.8" stroke="#fff" stroke-width="1.4"/><path d="M12 8.6V12l2.4 1.6" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></svg></div>
-          <div class="node" style="--size:50px;--node-a:.55"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.1" stroke="#fff" stroke-width="1.4"/><path d="M12 3v2.3M12 18.7V21M3 12h2.3M18.7 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></svg></div>
-          <div class="node node--lit" style="--size:50px;box-shadow:0 0 20px rgba(255,255,255,.18)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 13h4l2.5-5.5L13 17l2.5-4H21" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="node" style="--size:50px;--node-a:.55"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 15V9M10 17V7M14 14.4V9.6M18 16V8" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></svg></div>
-          <div class="node" style="--size:50px;--node-a:.55"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="6.4" stroke="#fff" stroke-width="1.4"/><circle cx="10" cy="10" r="1" fill="#fff"/><circle cx="14" cy="12.6" r=".8" fill="#fff"/><circle cx="10.6" cy="14.6" r=".7" fill="#fff"/></svg></div>
+      <div class="signal-tile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 12h4l2.4-5.4L12.6 17l2.2-5H21" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="signal-tile__label">MOTION</span>
+      </div>
+      <div class="signal-tile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.4"/><path d="M12 3.4v2.2M12 18.4v2.2M3.4 12h2.2M18.4 12h2.2M6 6l1.6 1.6M16.4 16.4 18 18M18 6l-1.6 1.6M7.6 16.4 6 18" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <span class="signal-tile__label">AMBIENT LIGHT</span>
+      </div>
+      <div class="signal-tile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19.6S4.4 14.8 4.4 9.6a3.9 3.9 0 0 1 7.6-1.3 3.9 3.9 0 0 1 7.6 1.3c0 5.2-7.6 10-7.6 10Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+        <span class="signal-tile__label">HEART RATE</span>
+      </div>
+      <div class="signal-tile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8.4" r="3.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.8 19.4c.9-3.2 3.3-5 6.2-5s5.3 1.8 6.2 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <span class="signal-tile__label">PRESENCE</span>
+      </div>
+      <div class="signal-tile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="7.4" stroke="currentColor" stroke-width="1.4"/><path d="M12 8.2V12l2.6 1.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <span class="signal-tile__label">CLOCK</span>
+      </div>
+    </div>
+
+    <div class="dia__link" aria-hidden="true">
+      <svg viewBox="0 0 880 60" preserveAspectRatio="none" fill="none">
+        <path d="M73 0 L440 60M220 0 L440 60M367 0 L440 60M513 0 L440 60M660 0 L440 60M807 0 L440 60" stroke="rgba(255,255,255,.22)" stroke-width="1.2"/>
+        <path class="dia__drift" d="M73 0 L440 60M220 0 L440 60M367 0 L440 60M513 0 L440 60M660 0 L440 60M807 0 L440 60" stroke="rgba(143,202,56,.55)" stroke-width="1.2" stroke-dasharray="6 18"/>
+      </svg>
+    </div>
+
+    <div class="dia__engine">
+      <div class="dia__engine-glow" aria-hidden="true"></div>
+      <svg class="dia__engine-prism" width="56" height="52" viewBox="0 0 56 52" fill="none" aria-hidden="true">
+        <path d="M28 6 L50 44 H6 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M28 6 L50 44 H6 Z" stroke="rgba(143,202,56,.28)" stroke-width="7" stroke-linejoin="round" style="filter:blur(4px)"/>
+      </svg>
+      <div class="dia__engine-copy">
+        <h3 class="h3">Prism Context Engine</h3>
+        <p>Fuses the available signals into state dimensions — and derives a confidence value for each one independently.</p>
+      </div>
+    </div>
+
+    <div class="dia__link" aria-hidden="true">
+      <svg viewBox="0 0 880 60" preserveAspectRatio="none" fill="none">
+        <path d="M440 0 L110 60M440 0 L330 60M440 0 L550 60M440 0 L770 60" stroke="rgba(255,255,255,.22)" stroke-width="1.2"/>
+        <path class="dia__drift" d="M440 0 L110 60M440 0 L330 60M440 0 L550 60M440 0 L770 60" stroke="rgba(143,202,56,.5)" stroke-width="1.2" stroke-dasharray="6 18"/>
+      </svg>
+    </div>
+
+    <div class="psv">
+      <div class="psv-card">
+        <span class="psv-card__label">AROUSAL</span>
+        <div class="psv-card__bars" role="img" aria-label="Value 71%, confidence 88%">
+          <span class="psv-bar"><span style="width:71%"></span></span>
+          <span class="psv-bar psv-bar--conf"><span style="width:88%"></span></span>
         </div>
+        <span class="psv-card__caption">How activated you are</span>
       </div>
-    </article>
+      <div class="psv-card">
+        <span class="psv-card__label">VALENCE</span>
+        <div class="psv-card__bars" role="img" aria-label="Value 58%, confidence 54%">
+          <span class="psv-bar"><span style="width:58%"></span></span>
+          <span class="psv-bar psv-bar--conf"><span style="width:54%"></span></span>
+        </div>
+        <span class="psv-card__caption">Which way it's leaning</span>
+      </div>
+      <div class="psv-card">
+        <span class="psv-card__label">COGNITIVE LOAD</span>
+        <div class="psv-card__bars" role="img" aria-label="Value 82%, confidence 94%">
+          <span class="psv-bar"><span style="width:82%"></span></span>
+          <span class="psv-bar psv-bar--conf"><span style="width:94%"></span></span>
+        </div>
+        <span class="psv-card__caption">How much you're carrying</span>
+      </div>
+      <div class="psv-card">
+        <span class="psv-card__label">READINESS</span>
+        <div class="psv-card__bars" role="img" aria-label="Value 47%, confidence 41%">
+          <span class="psv-bar"><span style="width:47%"></span></span>
+          <span class="psv-bar psv-bar--conf"><span style="width:41%"></span></span>
+        </div>
+        <span class="psv-card__caption">What you can take on</span>
+      </div>
+    </div>
 
-    <div class="connector" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="dia__legend">
+      <span class="dia__legend-key">VALUE</span>
+      <span class="dia__legend-key dia__legend-key--conf">CONFIDENCE</span>
+      <span class="dia__legend-note">PRISM STATE VECTOR — INDEPENDENT PER DIMENSION</span>
+    </div>
 
-    <article class="stage">
-      <div class="stage__copy">
-        <span class="eyebrow">02 — THE READ</span>
-        <h3 class="h3 h3--2xl mt-14">A live estimate, held honestly</h3>
-        <p>The engine holds a continuous estimate of your state, and of how confident it is in that estimate. Low confidence changes how it behaves.</p>
-      </div>
-      <div class="stage__art" aria-hidden="true">
-        <svg width="300" height="130" viewBox="0 0 300 130" fill="none">
-          <path d="M6 65 C40 30 74 30 108 65 S176 100 210 65 S262 40 294 52" stroke="rgba(255,255,255,.9)" stroke-width="1.6"/>
-          <path d="M6 49 C40 14 74 14 108 49 S176 84 210 49 S262 22 294 32" stroke="rgba(255,255,255,.35)" stroke-width="1.1" stroke-dasharray="3 6"/>
-          <path d="M6 81 C40 46 74 46 108 81 S176 116 210 81 S262 58 294 72" stroke="rgba(255,255,255,.35)" stroke-width="1.1" stroke-dasharray="3 6"/>
-          <circle cx="210" cy="65" r="4" fill="#fff"/>
-          <circle cx="210" cy="65" r="9.5" stroke="rgba(255,255,255,.35)" stroke-width="1"/>
-        </svg>
-      </div>
-    </article>
+    <!-- No lime dash on this leg: it carries control logic back, not signal in. -->
+    <div class="dia__link" aria-hidden="true">
+      <svg viewBox="0 0 880 60" preserveAspectRatio="none" fill="none">
+        <path d="M110 0 L440 60M330 0 L440 60M550 0 L440 60M770 0 L440 60" stroke="rgba(255,255,255,.22)" stroke-width="1.2"/>
+      </svg>
+    </div>
 
-    <div class="connector" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="dia__control">
+      <div>
+        <h3 class="h3 h3--sm">Target difference</h3>
+        <p>The engine holds a target state and works on the gap, per dimension. Default target is a neutral baseline.</p>
+      </div>
+      <div>
+        <h3 class="h3 h3--sm">Actuation authority</h3>
+        <p>Each dimension is only allowed to push as hard as its own confidence permits. Low confidence, small hand on the wheel.</p>
+      </div>
+    </div>
 
-    <article class="stage">
-      <div class="stage__copy">
-        <span class="eyebrow">03 — SOUND GENERATION</span>
-        <h3 class="h3 h3--2xl mt-14">Sound that reshapes itself</h3>
-        <p>Sound elements are designed by our audio team. Driven by the read, what you're hearing reshapes itself as your state changes.</p>
-      </div>
-      <div class="stage__art" aria-hidden="true">
-        <svg width="280" height="120" viewBox="0 0 280 120" fill="none">
-          <path d="M20 44v32M40 28v64M60 50v20M80 22v76M100 38v44M120 52v16M140 30v60M160 44v32M180 24v72M200 50v20M220 36v48M240 46v28M260 40v40" stroke="rgba(255,255,255,.85)" stroke-width="3" stroke-linecap="round"/>
-          <path d="M20 60 H260" stroke="rgba(255,255,255,.14)" stroke-width="1"/>
-        </svg>
-      </div>
-    </article>
+    <div class="dia__link" aria-hidden="true">
+      <svg viewBox="0 0 880 60" preserveAspectRatio="none" fill="none">
+        <path d="M440 0 L147 60M440 0 L440 60M440 0 L733 60" stroke="rgba(255,255,255,.22)" stroke-width="1.2"/>
+        <path class="dia__drift" d="M440 0 L147 60M440 0 L440 60M440 0 L733 60" stroke="rgba(143,202,56,.5)" stroke-width="1.2" stroke-dasharray="6 18"/>
+      </svg>
+    </div>
 
-    <div class="connector" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="dia__outputs">
+      <div class="out-card">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h2.4l2-6 3 12 2.4-8 1.6 4H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="out-card__label">PGAE — SOUND</span>
+        <p>Generative audio, composed continuously rather than played back.</p>
+      </div>
+      <div class="out-card">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="8.5" y="4" width="7" height="16" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M4.6 9.4a5 5 0 0 0 0 5.2M19.4 9.4a5 5 0 0 1 0 5.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="out-card__label">PGHE — HAPTICS</span>
+        <p>Vibrotactile output on the same state read, for when sound isn't wanted.</p>
+      </div>
+      <div class="out-card">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.4" y="5" width="17.2" height="12" rx="2.4" stroke="currentColor" stroke-width="1.5"/><path d="M9 20h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="out-card__label">PGUIE — INTERFACE</span>
+        <p>Pacing and presentation that ease off when you're already loaded.</p>
+      </div>
+    </div>
 
-    <article class="stage">
-      <div class="stage__copy">
-        <span class="eyebrow">04 — OUTPUT</span>
-        <h3 class="h3 h3--2xl mt-14">Output: your device</h3>
-        <p>Generated locally, in real time. Nothing has to leave your device for the sound to happen.</p>
-      </div>
-      <div class="stage__art" aria-hidden="true">
-        <svg width="280" height="120" viewBox="0 0 280 120" fill="none">
-          <path d="M96 40 a34 34 0 0 0 0 40" stroke="rgba(255,255,255,.35)" stroke-width="1.4" stroke-linecap="round"/>
-          <path d="M108 48 a20 20 0 0 0 0 24" stroke="rgba(255,255,255,.6)" stroke-width="1.4" stroke-linecap="round"/>
-          <path d="M184 40 a34 34 0 0 1 0 40" stroke="rgba(255,255,255,.35)" stroke-width="1.4" stroke-linecap="round"/>
-          <path d="M172 48 a20 20 0 0 1 0 24" stroke="rgba(255,255,255,.6)" stroke-width="1.4" stroke-linecap="round"/>
-          <rect x="122" y="30" width="36" height="60" rx="9" stroke="rgba(255,255,255,.9)" stroke-width="1.5"/>
-          <path d="M134 37h12" stroke="rgba(255,255,255,.6)" stroke-width="1.4" stroke-linecap="round"/>
-          <circle cx="140" cy="76" r="2" fill="#fff"/>
-        </svg>
-      </div>
-    </article>
+    <p class="dia__loop">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12a8 8 0 1 1 2.8 6.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4 17.6V12h5.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>CLOSED LOOP — THE STATE VECTOR IS RE-ESTIMATED CONTINUOUSLY, AND PARAMETERS MOVE RATE-LIMITED SO NOTHING JUMPS</span>
+    </p>
   </div>
 </section>
 
-<section class="section section--center" style="--pt:170px">
-  <h2 class="h2 measure" style="--measure:760px">One engine, many surfaces</h2>
-  <p class="body-lg measure mt-24" style="--measure:680px">The part that reads state and the part that makes sound are separate. That's why the same engine serves a student, a room, and a cabin — and why it can drive things other than audio.</p>
+<section class="section" style="--pt:170px" aria-labelledby="confidence-title">
+  <div class="container rule" style="--w:940px">
+    <div style="text-align:center">
+      <span class="eyebrow">CONFIDENCE, PER DIMENSION</span>
+      <h2 class="h2 measure mt-18" id="confidence-title" style="--measure:760px">When a signal drops, only its dimension loses authority.</h2>
+      <p class="body-lg measure mt-24" style="--measure:640px">Confidence isn't one number for the whole read. Each dimension carries its own, derived from which signals were actually available. Turn signals off below and watch what happens.</p>
+    </div>
+
+    <!-- Ships at full authority, which is what the weights give with every signal
+         on, so the panel reads correctly before (and without) confidence.js. -->
+    <div class="conf" data-confidence>
+      <div class="conf__toggles">
+        <button class="signal-toggle" type="button" aria-pressed="true" data-signal="interaction">INTERACTION</button>
+        <button class="signal-toggle" type="button" aria-pressed="true" data-signal="motion">MOTION</button>
+        <button class="signal-toggle" type="button" aria-pressed="true" data-signal="light">AMBIENT LIGHT</button>
+        <button class="signal-toggle" type="button" aria-pressed="true" data-signal="heart">HEART RATE</button>
+        <button class="signal-toggle" type="button" aria-pressed="true" data-signal="presence">PRESENCE</button>
+        <button class="signal-toggle" type="button" aria-pressed="true" data-signal="clock">CLOCK</button>
+      </div>
+
+      <div class="conf__rows">
+        <div class="conf__row" data-dimension="arousal" data-band="high">
+          <span class="conf__label" id="conf-arousal">AROUSAL</span>
+          <div class="conf__bar" role="progressbar" aria-labelledby="conf-arousal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="100% authority" data-confidence-bar>
+            <div class="conf__fill" style="width:100%" data-confidence-fill></div>
+          </div>
+          <span class="conf__pct" aria-hidden="true" data-confidence-pct>100%</span>
+        </div>
+        <div class="conf__row" data-dimension="valence" data-band="high">
+          <span class="conf__label" id="conf-valence">VALENCE</span>
+          <div class="conf__bar" role="progressbar" aria-labelledby="conf-valence" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="100% authority" data-confidence-bar>
+            <div class="conf__fill" style="width:100%" data-confidence-fill></div>
+          </div>
+          <span class="conf__pct" aria-hidden="true" data-confidence-pct>100%</span>
+        </div>
+        <div class="conf__row" data-dimension="load" data-band="high">
+          <span class="conf__label" id="conf-load">COGNITIVE LOAD</span>
+          <div class="conf__bar" role="progressbar" aria-labelledby="conf-load" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="100% authority" data-confidence-bar>
+            <div class="conf__fill" style="width:100%" data-confidence-fill></div>
+          </div>
+          <span class="conf__pct" aria-hidden="true" data-confidence-pct>100%</span>
+        </div>
+        <div class="conf__row" data-dimension="readiness" data-band="high">
+          <span class="conf__label" id="conf-readiness">READINESS</span>
+          <div class="conf__bar" role="progressbar" aria-labelledby="conf-readiness" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="100% authority" data-confidence-bar>
+            <div class="conf__fill" style="width:100%" data-confidence-fill></div>
+          </div>
+          <span class="conf__pct" aria-hidden="true" data-confidence-pct>100%</span>
+        </div>
+      </div>
+
+      <p class="conf__status" aria-live="polite" data-confidence-status>All signals available. Every dimension is at full authority.</p>
+    </div>
+
+    <p class="note measure mt-34 text-center" style="--measure:620px">Confidence is a weighted fusion of how well each contributing signal was actually covered in the last window. It degrades — it doesn't fall over.</p>
+  </div>
+</section>
+
+<section class="section" style="--pt:170px" aria-labelledby="ours-title">
+  <div class="container rule text-center" style="--w:940px">
+    <h2 class="h2 measure" id="ours-title" style="--measure:700px">Three things that make it ours.</h2>
+
+    <div class="grid grid--3 mt-60">
+      <article class="card">
+        <span class="eyebrow">01</span>
+        <h3 class="h3 mt-14">It has somewhere to go</h3>
+        <p class="body mt-12">Most adaptive systems mirror the state they detect. Prism holds a target, measures the gap, and works to close it over time.</p>
+      </article>
+      <article class="card">
+        <span class="eyebrow">02</span>
+        <h3 class="h3 mt-14">Uncertainty is a control input</h3>
+        <p class="body mt-12">Confidence doesn't just annotate the read — it caps how hard each dimension may act, so a shaky estimate can't produce a strong intervention.</p>
+      </article>
+      <article class="card">
+        <span class="eyebrow">03</span>
+        <h3 class="h3 mt-14">The read is a clean seam</h3>
+        <p class="body mt-12">Sensing and generation only meet at the state vector. Swap the surface or the modality, keep the engine — which is why a phone, a room and a cabin share one core.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section--center" style="--pt:170px" aria-labelledby="local-title">
+  <h2 class="h2 measure" id="local-title" style="--measure:760px">Runs where it reads</h2>
+  <p class="body-lg measure mt-24" style="--measure:660px">The whole loop executes locally, on the device doing the sensing. No round trip, no dependency on a connection, and no raw signal leaving the room it came from.</p>
 
   <div class="fanout" aria-hidden="true">
     <div class="fanout__hub">
-      <svg width="30" height="30" viewBox="0 0 32 32" fill="none"><path d="M16 8.6 L23.4 21.8 H8.6 Z" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg>
+      <svg width="30" height="30" viewBox="0 0 32 32" fill="none"><path d="M16 8.6 L23.4 21.8 H8.6 Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
     </div>
     <span class="fanout__spine"></span>
     <span class="fanout__bar"></span>
     <span class="fanout__drop" style="--x:16.6%"></span>
     <span class="fanout__drop" style="--x:50%"></span>
     <span class="fanout__drop" style="--x:83.4%"></span>
-    <span class="pill fanout__label" style="--x:16.6%">A STUDENT</span>
+    <span class="pill fanout__label" style="--x:16.6%">A PHONE</span>
     <span class="pill fanout__label" style="--x:50%">A ROOM</span>
     <span class="pill fanout__label" style="--x:83.4%">A CABIN</span>
   </div>
 </section>
 
-<section class="section section--center section--clip" style="--pt:170px;--pb:180px">
+<section class="section section--center section--clip" style="--pt:170px;--pb:180px" aria-labelledby="claim-title">
   <div class="cta-glow" style="--glow-a:.18" aria-hidden="true"></div>
   <div style="position:relative">
-    <h2 class="h2">The science behind the sound</h2>
+    <h2 class="h2" id="claim-title">What we claim, and what we don't</h2>
+    <p class="body-lg measure mt-22" style="--measure:520px">The architecture is filed. The effects are still being tested, and we say so.</p>
     <div class="mt-34">
       <a class="btn btn--primary" href="science.html">Read the science&nbsp;↗</a>
     </div>

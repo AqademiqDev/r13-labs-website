@@ -48,8 +48,21 @@
   /* Accent ---------------------------------------------------------------- */
   --lime: var(--accent);              /* #8fca38 */
   --lime-hover: var(--accent-hover);  /* #9fd34f */
+  --lime-text: #c7e896;               /* label on a lime tint, high-confidence % */
+  --lime-tint: rgba(143, 202, 56, .12);
+  --lime-wash: rgba(143, 202, 56, .14);
   --lime-glow-sm: 0 0 18px rgba(143, 202, 56, .3);
   --lime-glow: 0 0 22px rgba(143, 202, 56, .3);
+  --lime-glow-ring: 0 0 28px rgba(143, 202, 56, .28);
+
+  /* Confidence bands — the three steps the demo's bars and figures move
+     through as a dimension loses the signals behind it. */
+  --conf-high: var(--lime);
+  --conf-high-text: var(--lime-text);
+  --conf-mid: #b9a24a;
+  --conf-mid-text: #c0b591;
+  --conf-low: #6b5a2e;
+  --conf-low-text: var(--ink-muted);
 
   /* Layout ---------------------------------------------------------------- */
   --gutter: 40px;
@@ -247,6 +260,7 @@ h1, h2, h3 { margin: 0; }
   letter-spacing: -.01em;
 }
 
+.h3--sm { font-size: 19px; }
 .h3--lg { font-size: 22px; }
 .h3--xl { font-size: 24px; }
 .h3--2xl { font-size: 26px; }
@@ -667,27 +681,6 @@ h1, h2, h3 { margin: 0; }
   background: rgba(255, 255, 255, var(--rail-a, .28));
 }
 
-/* Vertical link between the numbered engine stages. */
-.connector {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.connector span:first-child,
-.connector span:last-child {
-  width: 1px;
-  height: 26px;
-  background: rgba(255, 255, 255, .25);
-}
-
-.connector span:nth-child(2) {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  border: 1.3px solid rgba(255, 255, 255, .6);
-}
-
 /* ---------------------------------------------------------------------------
    Home
    --------------------------------------------------------------------------- */
@@ -897,46 +890,405 @@ h1, h2, h3 { margin: 0; }
   filter: blur(6px);
 }
 
-.tech-hero__caption {
-  position: absolute;
-  left: 50%;
-  top: 196px;
-  transform: translateX(-50%);
+.tech-hero__body { position: relative; padding-top: 150px; }
+
+.tech-hero__beam { animation: r13flow 2.6s linear infinite; }
+.tech-hero__dot { animation: r13pulse-strong var(--dur, 5s) ease-in-out var(--delay, 0s) infinite; }
+
+/* The caption sits in normal flow under the lead, not in the backdrop — an
+   absolutely positioned one collides with the refracted beam fan. */
+.tech-hero__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-top: 32px;
+}
+
+.tech-hero__trail {
   font-family: var(--mono);
   font-size: 10.5px;
   letter-spacing: .2em;
-  color: #736b62;
-  white-space: nowrap;
+  color: var(--ink-soft);
 }
 
-.tech-hero__body { position: relative; padding-top: 150px; }
-
-.stage {
-  display: grid;
-  grid-template-columns: 1.05fr .95fr;
-  gap: 40px;
+.tech-hero__badge {
+  display: inline-flex;
   align-items: center;
-  background: var(--surface-card);
+  gap: 10px;
+  padding: 9px 18px;
   border: 1px solid var(--line-card);
-  border-radius: 26px;
-  padding: 38px 42px;
-  text-align: left;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .02);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .16em;
+  color: var(--ink-soft);
 }
 
-.stage__copy p {
-  margin: 12px 0 0;
-  font-size: 16.5px;
-  line-height: 1.6;
-  color: var(--ink-body);
-  text-wrap: pretty;
+.tech-hero__badge::before {
+  content: '';
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--lime);
 }
 
-.stage__art {
+/* The architecture diagram ------------------------------------------------
+
+   A single column of grids joined by connector SVGs. The connectors stretch
+   with preserveAspectRatio="none", so the column scales horizontally on its
+   own — but their endpoint x-coordinates are baked to the desktop column
+   counts, which is why they go once the grids reflow (see Responsive).
+   ------------------------------------------------------------------------- */
+
+.dia {
+  max-width: 880px;
+  margin-inline: auto;
+}
+
+.dia__link { height: 60px; }
+
+.dia__link svg {
+  width: 100%;
+  height: 100%;
+}
+
+.dia__drift { animation: r13drift 1.8s linear infinite; }
+
+.dia__signals {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.signal-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 8px;
+  border: 1px solid var(--line-card);
+  border-radius: 12px;
+  background: var(--surface-panel);
+  color: var(--ink-link);
+}
+
+.signal-tile__label {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: .1em;
+  line-height: 1.4;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+.dia__engine {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 150px;
+  gap: 24px;
+  overflow: hidden;
+  padding: 26px 32px;
+  border: 1px solid var(--line-card);
+  border-radius: 20px;
+  background: var(--surface-panel);
 }
+
+.dia__engine-glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 420px;
+  height: 180px;
+  background: radial-gradient(closest-side, var(--lime-wash), transparent 72%);
+}
+
+.dia__engine-prism {
+  position: relative;
+  flex: none;
+  color: var(--lime);
+}
+
+.dia__engine-copy { position: relative; }
+
+.dia__engine-copy p {
+  margin-top: 7px;
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--ink-body);
+}
+
+/* Prism state vector cards */
+.psv {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.psv-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px 18px;
+  border: 1px solid var(--line-card);
+  border-radius: 16px;
+  background: var(--surface-card);
+}
+
+.psv-card__label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  color: var(--ink-pill);
+}
+
+.psv-card__bars {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.psv-card__caption {
+  font-size: 12.5px;
+  color: var(--ink-muted);
+}
+
+.psv-bar {
+  display: block;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--line-card);
+  overflow: hidden;
+}
+
+.psv-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--ink);
+}
+
+.psv-bar--conf {
+  height: 2px;
+  border-radius: 1px;
+}
+
+.psv-bar--conf span { background: var(--lime); }
+
+.dia__legend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  font-family: var(--mono);
+  font-size: 10px;
+}
+
+.dia__legend-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: .14em;
+  color: var(--ink-soft);
+}
+
+.dia__legend-key::before {
+  content: '';
+  display: block;
+  width: 18px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--ink);
+}
+
+.dia__legend-key--conf::before {
+  height: 2px;
+  border-radius: 1px;
+  background: var(--lime);
+}
+
+.dia__legend-note {
+  letter-spacing: .16em;
+  color: var(--ink-muted);
+}
+
+.dia__control {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  align-items: center;
+  padding: 26px 32px;
+  border: 1px solid var(--line-card);
+  border-radius: 20px;
+  background: var(--surface-panel);
+}
+
+.dia__control p {
+  margin-top: 7px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-body);
+}
+
+.dia__outputs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.out-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px 22px;
+  border: 1px solid var(--line-card);
+  border-radius: 16px;
+  background: var(--surface-card);
+  color: var(--lime);
+}
+
+.out-card__label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  color: var(--ink-pill);
+}
+
+.out-card p {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink-body);
+}
+
+.dia__loop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 22px;
+  padding: 16px 22px;
+  border: 1px dashed var(--line-menu);
+  border-radius: 16px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .16em;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+.dia__loop svg {
+  flex: none;
+  color: var(--lime);
+}
+
+/* Confidence demo ---------------------------------------------------------
+
+   The page's only stateful piece. Percentages, the band each row sits in and
+   the status line all come from assets/js/confidence.js; the band arrives as
+   data-band so the colours stay here in the token layer.
+   ------------------------------------------------------------------------- */
+
+.conf {
+  margin-top: 56px;
+  padding: 34px 36px 38px;
+  border: 1px solid var(--line-card);
+  border-radius: 24px;
+  background: var(--surface-panel);
+  text-align: left;
+}
+
+.conf__toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.signal-toggle {
+  padding: 10px 16px;
+  border: 1px solid var(--line-chip);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  cursor: pointer;
+  transition: color .2s, background .2s, border-color .2s;
+}
+
+.signal-toggle:hover { border-color: var(--ink-muted); }
+
+.signal-toggle[aria-pressed='true'] {
+  border-color: var(--lime);
+  background: var(--lime-tint);
+  color: var(--lime-text);
+}
+
+.signal-toggle[aria-pressed='true']:hover { border-color: var(--lime-hover); }
+
+.conf__rows { margin-top: 34px; }
+
+.conf__row {
+  display: grid;
+  grid-template-columns: 150px 1fr 92px;
+  gap: 20px;
+  align-items: center;
+  padding: 16px 0;
+  border-top: 1px solid var(--line-rule);
+}
+
+.conf__label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .13em;
+  color: var(--ink-pill);
+}
+
+.conf__bar {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--line-rule);
+  overflow: hidden;
+}
+
+.conf__fill {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--conf-high);
+  transition: width .45s cubic-bezier(.4, 0, .2, 1), background .3s;
+}
+
+.conf__pct {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-align: right;
+  color: var(--conf-high-text);
+  transition: color .3s;
+}
+
+.conf__row[data-band='mid'] .conf__fill { background: var(--conf-mid); }
+.conf__row[data-band='mid'] .conf__pct { color: var(--conf-mid-text); }
+.conf__row[data-band='low'] .conf__fill { background: var(--conf-low); }
+.conf__row[data-band='low'] .conf__pct { color: var(--conf-low-text); }
+
+.conf__status {
+  margin-top: 26px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-muted);
+  text-align: center;
+}
+
+/* One-to-three branch diagram --------------------------------------------- */
 
 .fanout {
   position: relative;
@@ -957,9 +1309,10 @@ h1, h2, h3 { margin: 0; }
   width: 76px;
   height: 76px;
   border-radius: 50%;
-  border: 1.4px solid rgba(255, 255, 255, .9);
-  box-shadow: 0 0 28px rgba(255, 255, 255, .22);
+  border: 1.4px solid var(--lime);
+  box-shadow: var(--lime-glow-ring);
   background: var(--canvas);
+  color: var(--lime);
 }
 
 .fanout__spine,
@@ -1445,7 +1798,7 @@ h1, h2, h3 { margin: 0; }
 
 .topic[aria-pressed='true'] {
   border-color: var(--lime);
-  background: rgba(143, 202, 56, .12);
+  background: var(--lime-tint);
   color: var(--ink);
 }
 
@@ -1591,6 +1944,7 @@ h1, h2, h3 { margin: 0; }
 }
 @keyframes r13flow { to { stroke-dashoffset: -32 } }
 @keyframes r13flow-short { to { stroke-dashoffset: -14 } }
+@keyframes r13drift { to { stroke-dashoffset: -24 } }
 @keyframes r13arc { 0%, 100% { opacity: .2 } 50% { opacity: 1 } }
 @keyframes r13road { to { transform: translateX(-136px) } }
 @keyframes r13ring {
@@ -1618,8 +1972,8 @@ h1, h2, h3 { margin: 0; }
 
 @media (max-width: 980px) {
   .grid--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .stage { grid-template-columns: 1fr; gap: 28px; padding: 34px 32px; }
   .compare { gap: 32px; }
+  .dia__control { grid-template-columns: minmax(0, 1fr); gap: 22px; }
 }
 
 @media (max-width: 900px) {
@@ -1703,6 +2057,37 @@ h1, h2, h3 { margin: 0; }
   .page-hero { padding-top: 180px; }
 }
 
+/* The architecture diagram reflows to 3 / 2 / 1 columns here. Its connector
+   SVGs are dropped rather than redrawn: their endpoint x-coordinates are baked
+   to the desktop column counts, so they stop meeting the cards the moment the
+   grids change shape. Vertical order carries the flow instead. */
+@media (max-width: 700px) {
+  .dia__link { height: 20px; }
+  .dia__link svg { display: none; }
+
+  .dia__signals { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .psv { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dia__outputs { grid-template-columns: minmax(0, 1fr); }
+
+  .dia__engine {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 24px 22px;
+  }
+
+  .dia__control { padding: 24px 22px; }
+  .dia__legend { gap: 12px 18px; }
+  .dia__loop { padding: 16px 18px; letter-spacing: .12em; }
+
+  /* Label and figure share a line, the bar takes the one below. */
+  .conf { padding: 26px 22px 30px; }
+  .conf__row { grid-template-columns: 1fr auto; gap: 10px 16px; }
+  .conf__label { grid-area: 1 / 1; }
+  .conf__pct { grid-area: 1 / 2; }
+  .conf__bar { grid-area: 2 / 1 / 3 / 3; }
+}
+
 @media (max-width: 680px) {
   :root { --gutter: 22px; }
 
@@ -1729,7 +2114,6 @@ h1, h2, h3 { margin: 0; }
   .tech-hero__diagram,
   .science-hero__waves { opacity: .5; }
 
-  .stage { padding: 30px 26px; border-radius: 22px; }
   .card { padding: 28px 26px; }
   .card--roomy,
   .card--wide,
@@ -1773,6 +2157,9 @@ h1, h2, h3 { margin: 0; }
 
 @media (max-width: 480px) {
   .pill { white-space: normal; }
+  .tech-hero__trail { font-size: 9.5px; letter-spacing: .14em; }
+  .tech-hero__badge { font-size: 10px; letter-spacing: .12em; text-align: center; }
+  .dia__loop { letter-spacing: .1em; }
   .btn-row .btn,
   .btn-row .btn:only-child { width: 100%; }
   .platforms { gap: 18px; }
